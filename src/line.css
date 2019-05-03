@@ -1,0 +1,30 @@
+.hLine {
+	padding: 5px 12.5px;
+	display: inline-block;
+	box-sizing: border-box;
+	margin: 0px;
+	border-radius: 5px;
+	vertical-align: middle;
+}
+
+.vLine {
+	padding: 12.5px 5px;
+	display: inline-block;
+	box-sizing: border-box;
+	border-radius: 5px;
+	margin: 0px;
+	margin-right: 25px;
+	vertical-align: middle;
+}
+
+.white {
+	background-color: white;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.pink {
+	background-color: pink;
+}
