@@ -1,5 +1,6 @@
 import React from 'react';
 import Dot from './Dot';
+import Line from './Line';
 import './Board.css'
 
 class Board extends React.Component {
@@ -30,6 +31,7 @@ class Board extends React.Component {
 					<Dot />
 					<Dot />
 				</div>
+				<Line />
 			</div>
 		)
 	}
