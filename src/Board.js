@@ -9,14 +9,13 @@ class Board extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			blueTurn: false,
+			blueTurn: true,
 			hLines: Array(12).fill('white'),
 			vLines: Array(12).fill('white'),
 		}
 	}
 
 	handleHlineClick(i) {
-		alert('Hline called');
 		const hLines = this.state.hLines.slice();
 		hLines[i] = this.state.blueTurn ? 'blue' : 'pink';
 		this.setState({
@@ -26,7 +25,6 @@ class Board extends React.Component {
 	}
 
 	handleVlineClick(i) {
-		alert('Vline called');
 		const vLines = this.state.vLines.slice();
 		vLines[i] = this.state.blueTurn ? 'blue' : 'pink';
 		this.setState({
@@ -54,7 +52,7 @@ class Board extends React.Component {
 	}
 
 	render() {
-		const status = "Next player: Blue";
+		const status = `Next Player: ${this.state.blueTurn ? 'Blue' : 'Pink'}`;
 
 		return (
 			<div>
