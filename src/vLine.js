@@ -2,17 +2,12 @@ import React from 'react';
 import './line.css';
 
 class Vline extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			color: 'blue',
-			className: 'vLine '
-		}
-	}
-
 	render() {
 		return (
-			<span className={this.state.className + this.state.color}></span>
+			<span
+				className={`vLine ${this.props.color}`}
+				onClick={this.props.onClick}>
+			</span>
 		);
 	}
 }
