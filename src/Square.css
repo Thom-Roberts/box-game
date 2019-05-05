@@ -9,6 +9,10 @@
 	line-height: 0px;
 }
 
+p {
+	display: inline;
+}
+
 .hidden {
 	display: none;
 }

@@ -5,7 +5,7 @@ class Square extends React.Component {
 	render() {
 		return (
 			<div className="number">
-				<p className={this.props.visible ? `visible ` : `hidden `}>
+				<p className={this.props.color}>
 					1
 				</p>
 			</div>

@@ -14,8 +14,42 @@ class Board extends React.Component {
 			hLines: Array(12).fill('white'),
 			vLines: Array(12).fill('white'),
 			squares: Array(9).fill('white'),
+			scoreBlue: 0,
+			scorePink: 0
 		}
 	}
+
+	checkSquareScored(isHorizontal, lineNum) {
+		// Scoring combinations
+		const horizontals = [
+			[0,3], [1,4], [2,5], [3,6], [4,7], [5,8], [6,9], [7,10], [8,11],
+		];
+		const verticals = [
+			[0,1], [1,2], [2,3], [4,5], [5,6], [6,7], [8,9], [9,10], [10,11],
+		];
+
+		if(isHorizontal) {
+			horizontals.forEach((pair, index) => {
+				// If the pair includes
+				if(pair.includes(lineNum)) {
+					// See if both horizontals are filled
+					if(this.state.hLines[pair[0]] !== 'white' && this.state.hLines[pair[1]] !== 'white') {
+						// See if both verticals are also filled
+						if(this.state.vLines[verticals[index][0]] !== 'white' &&
+							this.state.vLines[verticals[index][1]] !== 'white') {
+								// If blue now has a turn, it means pink scored
+								this.state.blueTurn ?
+									this.setState({scorePink: this.state.scorePink + 1}) :
+									this.setState({scoreBlue: this.state.scoreBlue + 1});
+							}
+					}
+					// Check the verticals at the same position and see if they are also completed
+				}
+			});
+		}
+
+	}
+
 
 	handleHlineClick(i) {
 		const hLines = this.state.hLines.slice();
@@ -23,7 +57,7 @@ class Board extends React.Component {
 		this.setState({
 			hLines: hLines,
 			blueTurn: !this.state.blueTurn,
-		});
+		}, () => this.checkSquareScored(true, i));
 	}
 
 	handleVlineClick(i) {
@@ -38,7 +72,6 @@ class Board extends React.Component {
 	renderHline(i) {
 		return (
 			<Hline
-				key={i}
 				color={this.state.hLines[i]}
 				onClick={() => this.handleHlineClick(i)} />
 		);
@@ -47,7 +80,6 @@ class Board extends React.Component {
 	renderVline(i) {
 		return (
 			<Vline
-				key={i}
 				color={this.state.vLines[i]}
 				onClick={() => this.handleVlineClick(i)} />
 		);
@@ -56,7 +88,7 @@ class Board extends React.Component {
 	renderSquare(i) {
 		return (
 			<Square
-				key={i}
+				color={this.state.squares[i]}
 			/>
 		);
 	}
