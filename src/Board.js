@@ -66,8 +66,7 @@ class Board extends React.Component {
 
 		return (
 			<div>
-				<div>{status}</div>
-				<Square />
+				<div className="status">{status}</div>
 				<div className="row">
 					<Dot />
 					{this.renderHline(0)}
@@ -85,7 +84,6 @@ class Board extends React.Component {
 					{this.renderVline(2)}
 					{this.renderSquare(2)}
 					{this.renderVline(3)}
-					{this.renderSquare(3)}
 				</div>
 				<div className="row">
 					<Dot />
@@ -98,13 +96,12 @@ class Board extends React.Component {
 				</div>
 				<div className="row">
 					{this.renderVline(4)}
-					{this.renderSquare(4)}
+					{this.renderSquare(3)}
 					{this.renderVline(5)}
-					{this.renderSquare(5)}
+					{this.renderSquare(4)}
 					{this.renderVline(6)}
-					{this.renderSquare(6)}
+					{this.renderSquare(5)}
 					{this.renderVline(7)}
-					{this.renderSquare(7)}
 				</div>
 				<div className="row">
 					<Dot />
@@ -117,13 +114,12 @@ class Board extends React.Component {
 				</div>
 				<div className="row">
 					{this.renderVline(8)}
-					{this.renderSquare(8)}
+					{this.renderSquare(6)}
 					{this.renderVline(9)}
-					{this.renderSquare(9)}
+					{this.renderSquare(7)}
 					{this.renderVline(10)}
-					{this.renderSquare(10)}
+					{this.renderSquare(8)}
 					{this.renderVline(11)}
-					{this.renderSquare(11)}
 				</div>
 				<div className="row">
 					<Dot />
