@@ -9,26 +9,19 @@
 	line-height: 0px;
 }
 
-p {
-	display: inline;
-}
-
-.hidden {
-	display: none;
-}
-
-.visible {
-	display: inline;
-}
-
-.blue {
-	color: blue;
-}
-
-.pink {
+p.pink {
+	background-color: white;
 	color: pink;
+	display: inline;
 }
 
-.white {
+p.blue {
+	background-color: white;
+	color: blue;
+	display: inline;
+}
+
+p.white {
+	background-color: white;
 	color: white;
 }

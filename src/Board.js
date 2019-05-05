@@ -38,9 +38,17 @@ class Board extends React.Component {
 						if(this.state.vLines[verticals[index][0]] !== 'white' &&
 							this.state.vLines[verticals[index][1]] !== 'white') {
 								// If blue now has a turn, it means pink scored
-								this.state.blueTurn ?
-									this.setState({scorePink: this.state.scorePink + 1}) :
-									this.setState({scoreBlue: this.state.scoreBlue + 1});
+								// TODO: Set the color of the square at the index as well
+								const squares = this.state.squares.slice();
+
+								if(this.state.blueTurn) {
+									squares[index] = 'pink';
+									this.setState({scorePink: this.state.scorePink + 1, squares: squares});
+								}
+								else {
+									squares[index] = 'blue';
+									this.setState({scoreBlue: this.state.scoreBlue + 1, squares: squares});
+								}
 							}
 					}
 					// Check the verticals at the same position and see if they are also completed
