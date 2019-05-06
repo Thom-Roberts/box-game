@@ -12,7 +12,7 @@ class Board extends React.Component {
 		super(props);
 		this.state = this.getInitialState();
 
-		this.reset = this.reset.bind(this);
+		this.handleResetClick = this.handleResetClick.bind(this);
 	}
 
 	getInitialState() {
