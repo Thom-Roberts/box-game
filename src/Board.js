@@ -154,7 +154,7 @@ class Board extends React.Component {
 		);
 	}
 
-	reset() {
+	handleResetClick() {
 		this.setState(this.getInitialState());
 	}
 
@@ -230,7 +230,7 @@ class Board extends React.Component {
 					<Dot />
 				</div>
 
-				<button onClick={this.reset}>Reset</button>
+				<button onClick={this.handleResetClick}>Reset</button>
 			</div>
 		)
 	}
