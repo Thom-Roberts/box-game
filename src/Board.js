@@ -105,7 +105,7 @@ class Board extends React.Component {
 		// If there are no more white lines, the game ends
 		if(!this.state.hLines.includes('white') &&
 		!this.state.vLines.includes('white')) {
-			alert(`${this.state.scoreBlue > this.state.scorePink ? 'Blue ' : 'Pink '} wins!`);
+			alert(`${this.state.scoreBlue > this.state.scorePink ? 'Blue' : 'Pink'} wins!`);
 		}
 	}
 
