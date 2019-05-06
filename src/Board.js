@@ -28,6 +28,10 @@ class Board extends React.Component {
 			[0,1], [1,2], [2,3], [4,5], [5,6], [6,7], [8,9], [9,10], [10,11],
 		];
 
+		const squares = this.state.squares.slice();
+		let scorePink = this.state.scorePink;
+		let scoreBlue = this.state.scoreBlue;
+
 		if(isHorizontal) {
 			horizontals.forEach((pair, index) => {
 				// If the pair includes
@@ -43,38 +47,81 @@ class Board extends React.Component {
 
 								if(this.state.blueTurn) {
 									squares[index] = 'pink';
-									this.setState({scorePink: this.state.scorePink + 1, squares: squares});
+									scorePink++;
+									//this.setState({scorePink: this.state.scorePink + 1, squares: squares});
 								}
 								else {
 									squares[index] = 'blue';
-									this.setState({scoreBlue: this.state.scoreBlue + 1, squares: squares});
+									scoreBlue++;
+									//this.setState({scoreBlue: this.state.scoreBlue + 1, squares: squares});
 								}
 							}
 					}
-					// Check the verticals at the same position and see if they are also completed
+				}
+			});
+		}
+		else {
+			verticals.forEach((pair, index) => {
+				if(pair.includes(lineNum)) {
+					if(this.state.vLines[pair[0]] !== 'white' && this.state.vLines[pair[1]] !== 'white') {
+						if(this.state.hLines[horizontals[index][0]] !== 'white' &&
+							this.state.hLines[horizontals[index][1]] !== 'white') {
+								const squares = this.state.squares.slice();
+
+								if(this.state.blueTurn) {
+									squares[index] = 'pink';
+									scorePink++;
+									//this.setState({scorePink: this.state.scorePink + 1, squares: squares});
+								}
+								else {
+									squares[index] = 'blue';
+									scoreBlue++;
+									//this.setState({scoreBlue: this.state.scoreBlue + 1, squares: squares});
+								}
+							}
+					}
 				}
 			});
 		}
 
+		this.setState({scorePink: scorePink, scoreBlue: scoreBlue, squares: squares}, () => {
+			this.checkGameEnd();
+		});
+	}
+
+	/**
+	 * Sees if any of the lines on screen are still white.
+	 */
+	checkGameEnd() {
+		// If there are no more white lines, the game ends
+		if(!this.state.hLines.includes('white') &&
+		!this.state.vLines.includes('white')) {
+			alert(`${this.state.scoreBlue > this.state.scorePink ? 'Blue ' : 'Pink '} wins!`);
+		}
 	}
 
 
 	handleHlineClick(i) {
-		const hLines = this.state.hLines.slice();
-		hLines[i] = this.state.blueTurn ? 'blue' : 'pink';
-		this.setState({
-			hLines: hLines,
-			blueTurn: !this.state.blueTurn,
-		}, () => this.checkSquareScored(true, i));
+		if(this.state.hLines[i] === 'white') {
+			const hLines = this.state.hLines.slice();
+			hLines[i] = this.state.blueTurn ? 'blue' : 'pink';
+			this.setState({
+				hLines: hLines,
+				blueTurn: !this.state.blueTurn,
+			}, () => this.checkSquareScored(true, i));
+		}
+
 	}
 
 	handleVlineClick(i) {
-		const vLines = this.state.vLines.slice();
-		vLines[i] = this.state.blueTurn ? 'blue' : 'pink';
-		this.setState({
-			vLines: vLines,
-			blueTurn: !this.state.blueTurn,
-		});
+		if(this.state.vLines[i] === 'white') {
+			const vLines = this.state.vLines.slice();
+			vLines[i] = this.state.blueTurn ? 'blue' : 'pink';
+			this.setState({
+				vLines: vLines,
+				blueTurn: !this.state.blueTurn,
+			}, () => this.checkSquareScored(false, i));
+		}
 	}
 
 	renderHline(i) {
@@ -102,11 +149,13 @@ class Board extends React.Component {
 	}
 
 	render() {
-		const status = `Next Player: ${this.state.blueTurn ? 'Blue' : 'Pink'}`;
-
+		const status = `Current Turn: ${this.state.blueTurn ? 'Blue' : 'Pink'}`;
+		const scores = `Blue: ${this.state.scoreBlue}\n
+		Pink: ${this.state.scorePink}`;
 		return (
 			<div>
 				<div className="status">{status}</div>
+				<div className="scores">{scores}</div>
 				<div className="row">
 					<Dot />
 					{this.renderHline(0)}
