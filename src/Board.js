@@ -5,11 +5,18 @@ import Hline from './hLine';
 import Square from './Square';
 import './Board.css'
 
-class Board extends React.Component {
 
+
+class Board extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
+		this.state = this.getInitialState();
+
+		this.reset = this.reset.bind(this);
+	}
+
+	getInitialState() {
+		const initialState = {
 			blueTurn: true,
 			hLines: Array(12).fill('white'),
 			vLines: Array(12).fill('white'),
@@ -17,6 +24,8 @@ class Board extends React.Component {
 			scoreBlue: 0,
 			scorePink: 0
 		}
+
+		return initialState;
 	}
 
 	checkSquareScored(isHorizontal, lineNum) {
@@ -44,13 +53,13 @@ class Board extends React.Component {
 							this.state.vLines[verticals[index][1]] !== 'white') {
 								// Score was successful, so the turn needs to remain the same
 								blueTurn = this.state.blueTurn;
-								// If blue now has a turn, it means pink scored
+								// If it was blue's turn, then they get the point
 								if(this.state.blueTurn) {
-									squares[index] = 'pink';
+									squares[index] = 'blue';
 									scorePink++;
 								}
 								else {
-									squares[index] = 'blue';
+									squares[index] = 'pink';
 									scoreBlue++;
 								}
 							}
@@ -67,11 +76,11 @@ class Board extends React.Component {
 								blueTurn = this.state.blueTurn;
 
 								if(this.state.blueTurn) {
-									squares[index] = 'pink';
+									squares[index] = 'blue';
 									scorePink++;
 								}
 								else {
-									squares[index] = 'blue';
+									squares[index] = 'pink';
 									scoreBlue++;
 								}
 							}
@@ -80,8 +89,12 @@ class Board extends React.Component {
 			});
 		}
 
-		this.setState({scorePink: scorePink, scoreBlue: scoreBlue, squares: squares, blueTurn: blueTurn}, () => {
-			this.checkGameEnd();
+		this.setState({
+			scorePink: scorePink,
+			scoreBlue: scoreBlue,
+			squares: squares,
+			blueTurn: blueTurn}, () => {
+				this.checkGameEnd();
 		});
 	}
 
@@ -140,6 +153,10 @@ class Board extends React.Component {
 				color={this.state.squares[i]}
 			/>
 		);
+	}
+
+	reset() {
+		this.setState(this.getInitialState());
 	}
 
 	render() {
@@ -213,6 +230,8 @@ class Board extends React.Component {
 					{this.renderHline(11)}
 					<Dot />
 				</div>
+
+				<button onClick={this.reset}>Reset</button>
 			</div>
 		)
 	}
