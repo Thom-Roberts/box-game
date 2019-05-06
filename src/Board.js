@@ -31,6 +31,7 @@ class Board extends React.Component {
 		const squares = this.state.squares.slice();
 		let scorePink = this.state.scorePink;
 		let scoreBlue = this.state.scoreBlue;
+		let blueTurn = !this.state.blueTurn;
 
 		if(isHorizontal) {
 			horizontals.forEach((pair, index) => {
@@ -41,6 +42,8 @@ class Board extends React.Component {
 						// See if both verticals are also filled
 						if(this.state.vLines[verticals[index][0]] !== 'white' &&
 							this.state.vLines[verticals[index][1]] !== 'white') {
+								// Score was successful, so the turn needs to remain the same
+								blueTurn = this.state.blueTurn;
 								// If blue now has a turn, it means pink scored
 								if(this.state.blueTurn) {
 									squares[index] = 'pink';
@@ -61,6 +64,8 @@ class Board extends React.Component {
 					if(this.state.vLines[pair[0]] !== 'white' && this.state.vLines[pair[1]] !== 'white') {
 						if(this.state.hLines[horizontals[index][0]] !== 'white' &&
 							this.state.hLines[horizontals[index][1]] !== 'white') {
+								blueTurn = this.state.blueTurn;
+
 								if(this.state.blueTurn) {
 									squares[index] = 'pink';
 									scorePink++;
@@ -75,7 +80,7 @@ class Board extends React.Component {
 			});
 		}
 
-		this.setState({scorePink: scorePink, scoreBlue: scoreBlue, squares: squares}, () => {
+		this.setState({scorePink: scorePink, scoreBlue: scoreBlue, squares: squares, blueTurn: blueTurn}, () => {
 			this.checkGameEnd();
 		});
 	}
@@ -97,8 +102,7 @@ class Board extends React.Component {
 			const hLines = this.state.hLines.slice();
 			hLines[i] = this.state.blueTurn ? 'blue' : 'pink';
 			this.setState({
-				hLines: hLines,
-				blueTurn: !this.state.blueTurn,
+				hLines: hLines
 			}, () => this.checkSquareScored(true, i));
 		}
 
@@ -109,8 +113,7 @@ class Board extends React.Component {
 			const vLines = this.state.vLines.slice();
 			vLines[i] = this.state.blueTurn ? 'blue' : 'pink';
 			this.setState({
-				vLines: vLines,
-				blueTurn: !this.state.blueTurn,
+				vLines: vLines
 			}, () => this.checkSquareScored(false, i));
 		}
 	}
