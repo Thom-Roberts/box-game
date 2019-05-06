@@ -42,18 +42,13 @@ class Board extends React.Component {
 						if(this.state.vLines[verticals[index][0]] !== 'white' &&
 							this.state.vLines[verticals[index][1]] !== 'white') {
 								// If blue now has a turn, it means pink scored
-								// TODO: Set the color of the square at the index as well
-								const squares = this.state.squares.slice();
-
 								if(this.state.blueTurn) {
 									squares[index] = 'pink';
 									scorePink++;
-									//this.setState({scorePink: this.state.scorePink + 1, squares: squares});
 								}
 								else {
 									squares[index] = 'blue';
 									scoreBlue++;
-									//this.setState({scoreBlue: this.state.scoreBlue + 1, squares: squares});
 								}
 							}
 					}
@@ -66,17 +61,13 @@ class Board extends React.Component {
 					if(this.state.vLines[pair[0]] !== 'white' && this.state.vLines[pair[1]] !== 'white') {
 						if(this.state.hLines[horizontals[index][0]] !== 'white' &&
 							this.state.hLines[horizontals[index][1]] !== 'white') {
-								const squares = this.state.squares.slice();
-
 								if(this.state.blueTurn) {
 									squares[index] = 'pink';
 									scorePink++;
-									//this.setState({scorePink: this.state.scorePink + 1, squares: squares});
 								}
 								else {
 									squares[index] = 'blue';
 									scoreBlue++;
-									//this.setState({scoreBlue: this.state.scoreBlue + 1, squares: squares});
 								}
 							}
 					}
