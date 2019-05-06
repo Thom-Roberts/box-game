@@ -24,4 +24,5 @@ p.blue {
 p.white {
 	background-color: white;
 	color: white;
+	display: inline;
 }
