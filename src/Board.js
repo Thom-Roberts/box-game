@@ -56,11 +56,11 @@ class Board extends React.Component {
 								// If it was blue's turn, then they get the point
 								if(this.state.blueTurn) {
 									squares[index] = 'blue';
-									scorePink++;
+									scoreBlue++;
 								}
 								else {
 									squares[index] = 'pink';
-									scoreBlue++;
+									scorePink++;
 								}
 							}
 					}
@@ -77,11 +77,11 @@ class Board extends React.Component {
 
 								if(this.state.blueTurn) {
 									squares[index] = 'blue';
-									scorePink++;
+									scoreBlue++;
 								}
 								else {
 									squares[index] = 'pink';
-									scoreBlue++;
+									scorePink++;
 								}
 							}
 					}
@@ -108,7 +108,6 @@ class Board extends React.Component {
 			alert(`${this.state.scoreBlue > this.state.scorePink ? 'Blue ' : 'Pink '} wins!`);
 		}
 	}
-
 
 	handleHlineClick(i) {
 		if(this.state.hLines[i] === 'white') {
